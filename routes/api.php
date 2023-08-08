@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\Admin\ServiceController;
 use App\Http\Controllers\Admin\StatController;
 use App\Http\Controllers\Admin\AboutController;
 use App\Http\Controllers\Admin\ContactController;
@@ -25,6 +26,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::apiResource('herosection',HeroSectionController::class);
+Route::apiResource('service',ServiceController::class);
 Route::get('socialmedia', [SocialMediaController::class, 'index']);
 Route::patch('socialmedia/{id}', [SocialMediaController::class, 'update']);
 Route::get('about',[AboutController::class,'index']);
