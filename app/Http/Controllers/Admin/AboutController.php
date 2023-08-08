@@ -10,24 +10,42 @@ use App\Http\Resources\AboutResource;
 class AboutController extends Controller
 {
     public function index(){
-     return About::first();
+     return AboutResource::collection(About::first()->get());
     }
+    
     public function store(Request $request){
         $request->validate([
-            'description'=>'required|max:255',
-            'image' =>'nullable|mimes:png,jpg,jpeg',
+            'mission'=>'required|max:400',
+            'vision'=>'required|max:400',
+            'goal'=>'required|max:400',
+            
         ]);
         $about=About::first();
-         if($request->hasfile('image')){
-                if ($about->image && file_exists(public_path($about->image))) {
-                    unlink(public_path($about->image));
-                }
-                $img_name=time()."_".$request->file('image')->getClientOriginalExtension();
-                $request->file('image')->move(public_path('about'),$img_name);      
-            }
+        if($about)
+        { 
             $about->update([
-                'description' => $request->description,
-                'image' => $request->file('image') ? 'about/'.$img_name : $about->image,
+            'mission' => $request->mission,
+            'vision' => $request->vision,
+            'goal' => $request->goal
+        ]);
+        return response()->json([
+            'status' => 200,
+            'message' => 'about record updated successfully'
+        ]);
+        }
+        else{
+            About::create([
+                'mission' => $request->mission,
+                'vision' => $request->vision,
+                'goal' => $request->goal
             ]);
+            return response()->json([
+                'status' => 200,
+                'message' => 'about record created successfully'
+            ]);
+
+        }
+       
+           
     }
 }
