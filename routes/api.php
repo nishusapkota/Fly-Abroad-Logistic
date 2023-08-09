@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\BlogController;
 use App\Http\Controllers\Admin\StatController;
 use App\Http\Controllers\Admin\AboutController;
 use App\Http\Controllers\Admin\ContactController;
+use App\Http\Controllers\Admin\FreightController;
 use App\Http\Controllers\Admin\ServiceController;
 use App\Http\Controllers\Admin\CustomerController;
 use App\Http\Controllers\Admin\HeroSectionController;
@@ -36,7 +37,7 @@ Route::apiResource('blog',BlogController::class);
 Route::apiResource('service',ServiceController::class);
 Route::apiResource('shipping-partner',ShippingPartnerController::class);
 Route::apiResource('customer',CustomerController::class);
-
+Route::apiResource('freight',FreightController::class);
 
 Route::get('general-setting',[GeneralSettingController::class,'index']);
 Route::post('general-setting',[GeneralSettingController::class,'store']);
