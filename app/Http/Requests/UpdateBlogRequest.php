@@ -6,7 +6,7 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
-class UpdateHeroSection extends FormRequest
+class UpdateBlogRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,11 +24,10 @@ class UpdateHeroSection extends FormRequest
     public function rules(): array
     {
         return [
-            'image'=>'nullable|mimes:png,jpg,jpeg',
-            'sub_heading'=>'required|max:100',
-            'heading'=>'required|max:100',
-            'order'=>'required|numeric',
-            'visibility'=>'nullable',
+            'image' => 'nullable|image|mimes:png,jpg|dimensions:max-width:1038,max-height:338',
+            'title' => 'required',
+            'description' => 'required',
+            'visibility' => 'nullable'
         ];
     }
 

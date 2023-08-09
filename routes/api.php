@@ -3,13 +3,14 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-use App\Http\Controllers\Admin\ServiceController;
+use App\Http\Controllers\Admin\BlogController;
 use App\Http\Controllers\Admin\StatController;
 use App\Http\Controllers\Admin\AboutController;
 use App\Http\Controllers\Admin\ContactController;
-use App\Http\Controllers\Admin\GeneralSettingController;
+use App\Http\Controllers\Admin\ServiceController;
 use App\Http\Controllers\Admin\HeroSectionController;
 use App\Http\Controllers\Admin\SocialMediaController;
+use App\Http\Controllers\Admin\GeneralSettingController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,6 +28,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::apiResource('herosection',HeroSectionController::class);
+Route::apiResource('blog',BlogController::class);
 Route::apiResource('service',ServiceController::class);
 Route::get('general-setting',[GeneralSettingController::class,'index']);
 Route::post('general-setting',[GeneralSettingController::class,'store']);
