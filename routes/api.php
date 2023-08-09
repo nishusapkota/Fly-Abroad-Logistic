@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\ServiceController;
 use App\Http\Controllers\Admin\HeroSectionController;
 use App\Http\Controllers\Admin\SocialMediaController;
 use App\Http\Controllers\Admin\GeneralSettingController;
+use App\Http\Controllers\Admin\ShippingPartnerController;
 use App\Http\Controllers\SiteController;
 
 /*
@@ -31,6 +32,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::apiResource('herosection',HeroSectionController::class);
 Route::apiResource('blog',BlogController::class);
 Route::apiResource('service',ServiceController::class);
+Route::apiResource('shipping-partner',ShippingPartnerController::class);
 Route::get('general-setting',[GeneralSettingController::class,'index']);
 Route::post('general-setting',[GeneralSettingController::class,'store']);
 Route::get('socialmedia', [SocialMediaController::class, 'index']);
