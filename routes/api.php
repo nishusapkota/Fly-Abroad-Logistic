@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\ServiceController;
 use App\Http\Controllers\Admin\HeroSectionController;
 use App\Http\Controllers\Admin\SocialMediaController;
 use App\Http\Controllers\Admin\GeneralSettingController;
+use App\Http\Controllers\SiteController;
 
 /*
 |--------------------------------------------------------------------------
@@ -42,3 +43,5 @@ Route::get('stats',[StatController::class,'index']);
 Route::post('stats',[StatController::class,'store']);
 
 
+Route::post('query',[SiteController::class,'store']);
+Route::get('query',[SiteController::class,'index']);
