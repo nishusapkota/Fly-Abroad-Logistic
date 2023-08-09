@@ -1,18 +1,20 @@
 <?php
 
+use App\Models\Customer;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Route;
 
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\SiteController;
 use App\Http\Controllers\Admin\BlogController;
 use App\Http\Controllers\Admin\StatController;
 use App\Http\Controllers\Admin\AboutController;
 use App\Http\Controllers\Admin\ContactController;
 use App\Http\Controllers\Admin\ServiceController;
+use App\Http\Controllers\Admin\CustomerController;
 use App\Http\Controllers\Admin\HeroSectionController;
 use App\Http\Controllers\Admin\SocialMediaController;
 use App\Http\Controllers\Admin\GeneralSettingController;
 use App\Http\Controllers\Admin\ShippingPartnerController;
-use App\Http\Controllers\SiteController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,6 +35,9 @@ Route::apiResource('herosection',HeroSectionController::class);
 Route::apiResource('blog',BlogController::class);
 Route::apiResource('service',ServiceController::class);
 Route::apiResource('shipping-partner',ShippingPartnerController::class);
+Route::apiResource('customer',CustomerController::class);
+
+
 Route::get('general-setting',[GeneralSettingController::class,'index']);
 Route::post('general-setting',[GeneralSettingController::class,'store']);
 Route::get('socialmedia', [SocialMediaController::class, 'index']);
