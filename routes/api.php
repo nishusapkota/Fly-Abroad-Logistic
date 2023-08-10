@@ -16,6 +16,8 @@ use App\Http\Controllers\Admin\HeroSectionController;
 use App\Http\Controllers\Admin\SocialMediaController;
 use App\Http\Controllers\Admin\GeneralSettingController;
 use App\Http\Controllers\Admin\ShippingPartnerController;
+use App\Models\HeroSection;
+use App\Models\SocialMedia;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,17 +34,28 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+
 Route::apiResource('herosection',HeroSectionController::class);
+Route::get('herosection/change-status/{id}',[HeroSectionController::class,'changeStatus']);
+Route::post('update-order',[HeroSectionController::class,'updateOrder']);
+
 Route::apiResource('blog',BlogController::class);
+Route::get('blog/change-status/{id}',[BlogController::class,'changeStatus']);
+
 Route::apiResource('service',ServiceController::class);
+Route::get('service/change-status/{id}',[ServiceController::class,'changeStatus']);
+
 Route::apiResource('shipping-partner',ShippingPartnerController::class);
 Route::apiResource('customer',CustomerController::class);
 Route::apiResource('freight',FreightController::class);
 
 Route::get('general-setting',[GeneralSettingController::class,'index']);
 Route::post('general-setting',[GeneralSettingController::class,'store']);
+
 Route::get('socialmedia', [SocialMediaController::class, 'index']);
 Route::patch('socialmedia/{id}', [SocialMediaController::class, 'update']);
+Route::get('socialmedia/change-status/{id}',[SocialMediaController::class,'changeStatus']);
+
 Route::get('about',[AboutController::class,'index']);
 Route::post('about',[AboutController::class,'store']);
 Route::get('contact',[ContactController::class,'index']);
@@ -53,3 +66,4 @@ Route::post('stats',[StatController::class,'store']);
 
 Route::post('query',[SiteController::class,'store']);
 Route::get('query',[SiteController::class,'index']);
+

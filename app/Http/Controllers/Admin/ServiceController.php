@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreServiceRequest;
 use App\Http\Requests\UpdateServiceRequest;
 use App\Http\Resources\ServiceResource;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class ServiceController extends Controller
 {
@@ -22,7 +23,20 @@ class ServiceController extends Controller
         ]);
     }
 
+    public function changeStatus($id) {
+            $service =Service::findOrFail($id);
+            if($service->visibility == 1){
+                $service->update([
+                    'visibility' => 0
+                ]);
+            }else{
+                $service->update([
+                    'visibility' => 1
+                ]);
+            }     
+    }
    
+
     public function store(StoreServiceRequest $request)
     {
         $img_name = time()."_".$request->file('image')->getClientOriginalName();
@@ -32,7 +46,7 @@ class ServiceController extends Controller
             'short_description' => $request->short_description,
             'long_description' => $request->long_description,
             'image' => 'service/' .$img_name,
-            'visibility' => $request->visibility ? '1' : '0'
+            // 'visibility' => $request->visibility ? '1' : '0'
         ]);
         return response()->json([
             'status' => 200,
@@ -64,7 +78,7 @@ class ServiceController extends Controller
                 'heading' => $request->heading,
                 'short_description' => $request->short_description,
                 'long_description' => $request->long_description,
-                'visibility' => $request->visibility ? '1' : '0'
+                // 'visibility' => $request->visibility ? '1' : '0'
             ]);
 
             return response()->json([

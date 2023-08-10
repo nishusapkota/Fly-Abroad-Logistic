@@ -27,7 +27,7 @@ class StoreContactRequest extends FormRequest
         $contactId= $this->route('contact');
         return [
             'phone' => 'required|array',
-            'phone.*' => 'regex:/^([0-9\s\-\+\(\)]*)$/|min:10',
+            'phone.*' => 'regex:/^98[0-9]*$/|min:10',
             'email' => 'required|array',
             'email.*' => 'email|unique:contacts,email,'.$contactId,
             'location' =>'required',

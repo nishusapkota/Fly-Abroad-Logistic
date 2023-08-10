@@ -21,6 +21,19 @@ class BlogController extends Controller
         ]);
     }
 
+    public function changeStatus($id) {
+        $blog =Blog::findOrFail($id);
+        if($blog->visibility == 1){
+            $blog->update([
+                'visibility' => 0
+            ]);
+        }else{
+            $blog->update([
+                'visibility' => 1
+            ]);
+        }     
+}
+
     public function store(StoreBlogRequest $request)
     {
         $img_name = time() . "_" . $request->file('image')->getClientOriginalName();
@@ -29,7 +42,7 @@ class BlogController extends Controller
             'image' => 'blog/' . $img_name,
             'title' => $request->title,
             'description' => $request->description,
-            'visibility' => $request->visibility ? '1' : '0'
+            // 'visibility' => $request->visibility ? '1' : '0'
         ]);
         return response()->json([
             'status' => 200,
@@ -54,7 +67,7 @@ class BlogController extends Controller
                 'image' => isset($img_name) ? 'blog/' . $img_name : $blog->image,
                 'title' => $request->title,
                 'description' => $request->description,
-                'visibility' => $request->visibility ? '1' : '0'
+                // 'visibility' => $request->visibility ? '1' : '0'
             ]);
             return response()->json([
                 'status' => 200,

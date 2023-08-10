@@ -27,7 +27,7 @@ class StoreHeroSection extends FormRequest
             'image'=>'required|mimes:png,jpg,jpeg',
             'sub_heading'=>'required|max:100',
             'heading'=>'required|max:100',
-            'order'=>'required|numeric',
+            'order'=>'required|numeric|unique:hero_sections,order',
             'visibility'=>'nullable',
         ];
     }

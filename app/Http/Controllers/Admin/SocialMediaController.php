@@ -38,4 +38,17 @@ class SocialMediaController extends Controller
         
 
     }
+
+    public function changeStatus($id) {
+        $social_media =SocialMedia::findOrFail($id);
+        if($social_media->status == 1){
+            $social_media->update([
+                'status' => 0
+            ]);
+        }else{
+            $social_media->update([
+                'status' => 1
+            ]);
+        }     
+}
 }

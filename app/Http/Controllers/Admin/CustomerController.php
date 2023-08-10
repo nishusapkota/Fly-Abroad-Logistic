@@ -79,7 +79,6 @@ class CustomerController extends Controller
         'sender_city' => $request->sender_city,
         'sender_zip' => $request->sender_zip,
         'sender_address' => $request->sender_address,
-
         'receiver_name' => $request->receiver_name,
         'receiver_contact' => $request->receiver_contact,
         'receiver_country' => $request->receiver_country,
