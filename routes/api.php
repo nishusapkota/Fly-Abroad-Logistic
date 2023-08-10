@@ -1,12 +1,15 @@
 <?php
 
 use App\Models\Customer;
-use Illuminate\Http\Request;
+use App\Models\HeroSection;
 
+use App\Models\SocialMedia;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SiteController;
 use App\Http\Controllers\Admin\BlogController;
 use App\Http\Controllers\Admin\StatController;
+use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\AboutController;
 use App\Http\Controllers\Admin\ContactController;
 use App\Http\Controllers\Admin\FreightController;
@@ -16,8 +19,6 @@ use App\Http\Controllers\Admin\HeroSectionController;
 use App\Http\Controllers\Admin\SocialMediaController;
 use App\Http\Controllers\Admin\GeneralSettingController;
 use App\Http\Controllers\Admin\ShippingPartnerController;
-use App\Models\HeroSection;
-use App\Models\SocialMedia;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,10 +31,12 @@ use App\Models\SocialMedia;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
 
+Route::post('login', [UserController::class,'login']);
+Route::apiResource('user',UserController::class);
+// Route::post('register',[UserController::class,'register']);
+
+Route::group(['middleware' => 'auth:api'] ,function(){
 
 Route::apiResource('herosection',HeroSectionController::class);
 Route::get('herosection/change-status/{id}',[HeroSectionController::class,'changeStatus']);
@@ -63,7 +66,10 @@ Route::post('contact',[ContactController::class,'store']);
 Route::get('stats',[StatController::class,'index']);
 Route::post('stats',[StatController::class,'store']);
 
-
 Route::post('query',[SiteController::class,'store']);
 Route::get('query',[SiteController::class,'index']);
+
+});
+
+
 

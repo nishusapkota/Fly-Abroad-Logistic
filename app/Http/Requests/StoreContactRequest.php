@@ -29,7 +29,7 @@ class StoreContactRequest extends FormRequest
             'phone' => 'required|array',
             'phone.*' => 'regex:/^98[0-9]*$/|min:10',
             'email' => 'required|array',
-            'email.*' => 'email|unique:contacts,email,'.$contactId,
+            'email.*' => 'email',
             'location' =>'required',
             'link' => 'required'
         ];
