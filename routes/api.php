@@ -38,6 +38,7 @@ Route::apiResource('user',UserController::class);
 
 Route::group(['middleware' => 'auth:api'] ,function(){
 
+Route::post('logout',[UserController::class,'logout']);
 Route::apiResource('herosection',HeroSectionController::class);
 Route::get('herosection/change-status/{id}',[HeroSectionController::class,'changeStatus']);
 Route::post('update-order',[HeroSectionController::class,'updateOrder']);
