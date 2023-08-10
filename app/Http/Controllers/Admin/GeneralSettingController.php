@@ -12,7 +12,7 @@ class GeneralSettingController extends Controller
 {
     public function index(){
         // dd(GeneralSetting::first());
-        return GeneralSettingResource::collection(GeneralSetting::first()->get());
+        return GeneralSettingResource::collection(GeneralSetting::first());
     }
 
     public function store(GeneralSettingRequest $request){

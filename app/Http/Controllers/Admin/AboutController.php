@@ -10,7 +10,7 @@ use App\Http\Resources\AboutResource;
 class AboutController extends Controller
 {
     public function index(){
-     return AboutResource::collection(About::first()->get());
+     return AboutResource::collection(About::first());
     }
     
     public function store(Request $request){

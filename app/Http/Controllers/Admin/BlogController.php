@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreBlogRequest;
 use App\Http\Requests\UpdateBlogRequest;
 use App\Http\Resources\BlogResource;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class BlogController extends Controller
 {
@@ -83,15 +84,15 @@ class BlogController extends Controller
 
     public function destroy($id)
     {
-        $blog = Blog::first()->get();
-        if ($blog) {
+        try{
+            $blog = Blog::find($id);
             unlink(public_path($blog->image));
             $blog->delete();
             return response()->json([
                 'status' => 200,
                 'message' => 'Blog deleted successfully..'
             ]);
-        } else {
+        }catch(ModelNotFoundException $exception){
             return response()->json([
                 'status' => 200,
                 'message' => 'Record not found..'
