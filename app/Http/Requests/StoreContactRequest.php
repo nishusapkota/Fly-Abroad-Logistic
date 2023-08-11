@@ -2,7 +2,8 @@
 
 namespace App\Http\Requests;
 
-use App\Rules\UniqueEmailRule;
+use App\Models\Contact;
+use App\Rules\UniqueJsonFieldRule;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
@@ -22,18 +23,27 @@ class StoreContactRequest extends FormRequest
      *
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array|string>
      */
-    public function rules()
-    {
-        $contactId= $this->route('contact');
-        return [
-            'phone' => 'required|array',
-            'phone.*' => 'regex:/^98[0-9]*$/|min:10',
-            'email' => 'required|array',
-            'email.*' => 'email',
-            'location' =>'required',
-            'link' => 'required'
-        ];
-    }
+
+
+     public function rules()
+     {
+         return [
+             'phone' => 'required|array',
+             'phone.*' => [
+                 'regex:/^98[0-9]*$/',
+                 'min:10',
+                'distinct'
+             ],
+             'email' => 'required|array',
+             'email.*' => [
+                 'email',
+                 'distinct'
+             ],
+             'location' => 'required',
+             'link' => 'required'
+         ];
+     }
+     
     public function failedValidation(Validator $validator)
     {
         throw new HttpResponseException(response()->json([
